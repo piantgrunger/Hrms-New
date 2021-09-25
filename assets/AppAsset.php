@@ -23,8 +23,10 @@ class AppAsset extends AssetBundle
         'template/vendors/mdi/css/materialdesignicons.min.css',
         'template/vendors/css/vendor.bundle.base.css',
         'template/css/style.css',
+        'https://use.fontawesome.com/releases/v5.3.1/css/all.css',
     ];
     public $js = [
+        'js/yii_overrides.js',
       //  "template/vendors/js/vendor.bundle.base.js",
         "template/vendors/chart.js/Chart.min.js",
         "template/js/off-canvas.js",
@@ -34,7 +36,9 @@ class AppAsset extends AssetBundle
     public $depends = [
        'yii\web\YiiAsset',
     'yii\bootstrap4\BootstrapAsset',
-    'rmrevin\yii\fontawesome\AssetBundle',
+    //'rmrevin\yii\fontawesome\AssetBundle',
+    
         //additional import of third party alert project
+        'app\assets\SweetAlertAsset',
     ];
 }

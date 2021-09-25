@@ -5,19 +5,19 @@ use yii\widgets\DetailView;
 use hscstudio\mimin\components\Mimin;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Akun */
+/* @var $model app\models\Departemen */
 
 $this->title = $model->kode;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Daftar Akun'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Daftar Departemen'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="akun-view">
+<div class="departemen-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-             <?php if ((Mimin::checkRoute($this->context->id."/update"))) { ?>        <?= Html::a(Yii::t('app', 'Ubah'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?php } if ((Mimin::checkRoute($this->context->id."/delete"))) { ?>        <?= Html::a(Yii::t('app', 'Hapus'), ['delete', 'id' => $model->id], [
+             <?php if ((Mimin::checkRoute($this->context->id."/update"))){ ?>        <?= Html::a(Yii::t('app', 'Ubah'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?php } if ((Mimin::checkRoute($this->context->id."/delete"))){ ?>        <?= Html::a(Yii::t('app', 'Hapus'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => Yii::t('app', 'Apakah Anda yakin ingin menghapus item ini??'),
@@ -29,14 +29,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'parent_id',
-            'level',
+            'id_divisi',
             'kode',
             'nama',
-            'd_k',
-            'm_d',
-            'kelompok',
-        ],
+                  ],
     ]) ?>
 
 </div>

@@ -49,9 +49,9 @@ AppAsset::register($this);
 		          </nav>        </span>
               </div>
             </div>
-            <div class="row" id="proBanner">
+            <div class="card" id="proBanner">
 
-              <div class="col-12">
+              <div class="card-body">
 
             <?=$content?>
               </div>

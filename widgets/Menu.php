@@ -16,13 +16,13 @@ class Menu extends \yii\widgets\Menu
     /**
      * @inheritdoc
      */
-    public $linkTemplate = '<a href="{url}" class="nav-link" aria-expanded="false">{label}  {icon} </a>';
+    public $linkTemplate = '<a href="{url}" class="nav-link" >{label}  {icon} </a>';
     /**
      * @inheritdoc
      * Styles all labels of items on sidebar by AdminLTE
      */
     public $labelTemplate = '<span class="menu-title">{label}</span>';
-    public $submenuTemplate = "\n<div class='collapse' id={id}> <ul aria-expanded='false'  class='nav flex-column sub-menu'>\n{items}\n</ul></div>\n";
+    public $submenuTemplate = "\n<div class='collapse' id={id}> <ul aria-expanded='{show}'  class='nav flex-column sub-menu'>\n{items}\n</ul></div>\n";
     public $activateParents = true;
     public $defaultIconHtml = '<i class="fa fa-circle-o"></i> ';
 
@@ -126,7 +126,7 @@ class Menu extends \yii\widgets\Menu
             $menu = $this->renderItem($item);
             if (!empty($item['items'])) {
                 $menu .= strtr($this->submenuTemplate, [
-                    '{show}' => $item['active'] ? "in" : '',
+                    '{show}' => $item['active'] ? "true" : 'false',
                     '{items}' => $this->renderItems($item['items']),
                     '{id}' => isset($item['id']) ? $item['id'] : "",
                 ]);

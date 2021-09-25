@@ -1,4 +1,9 @@
 <?php
+
+use yii\helpers\Url;
+
+use hscstudio\mimin\components\Mimin;
+
     $menuItems =
         [
                     ['label' => 'Dashboard', 'icon' => 'home', 'url' => ['/site/index'], 'visible' => !Yii::$app->user->isGuest],
@@ -14,6 +19,32 @@
                     ['label' => 'Role', 'icon' => 'account-multiple', 'url' => ['/role/'], 'visible' => !Yii::$app->user->isGuest],
                     ['label' => 'User', 'icon' => 'account-plus', 'url' => ['/user/'], 'visible' => !Yii::$app->user->isGuest],
                    ], ],
+
+                   [
+                    'visible' => !Yii::$app->user->isGuest,
+                    'label' => 'Master',
+                    'icon' => 'users',
+                    'url' => '#',
+                    'id' => 'master',
+                    'items' => [
+                ['label' => 'Divisi', 'icon' => 'houzz', 'url' => ['/divisi/index'], 'visible' => !Yii::$app->user->isGuest],
+                ['label' => 'Departemen', 'icon' => 'google-circles-extended', 'url' => ['/departemen/index'], 'visible' => !Yii::$app->user->isGuest],
+                ['label' => 'Grade', 'icon' => 'view-list', 'url' => ['/grade/index'], 'visible' => !Yii::$app->user->isGuest],
+  
+                ['label' => 'Jabatan', 'icon' => 'sitemap', 'url' => ['/jabatan/index'], 'visible' => !Yii::$app->user->isGuest],
+          
+               ], ],
+
+               [
+                'visible' => !Yii::$app->user->isGuest,
+                'label' => 'Rekrutment',
+                'icon' => 'users',
+                'url' => '#',
+                'id' => 'rekrutment',
+                'items' => [
+            ['label' => 'Lowongan', 'icon' => 'newspaper', 'url' => ['/lowongan/index'], 'visible' => !Yii::$app->user->isGuest],
+       
+           ], ],
 
                 ];
 
