@@ -11,7 +11,7 @@ use yii\bootstrap4\Breadcrumbs;
 use app\widgets\Alert;
 use yii\helpers\Url;
 use app\assets\AppAsset;
-
+$this->title = 'HRMS';
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
