@@ -1,46 +1,63 @@
 <?php
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \common\models\LoginForm */
 
-use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
+$this->title = 'Sign In';
 
-$this->title = 'Login';
-$this->params['breadcrumbs'][] = $this->title;
+$fieldOptions1 = [
+    'options' => ['class' => 'form-group has-feedback'],
+    'inputTemplate' => "{input}<span class='glyphicon glyphicon-user form-control-feedback'></span>",
+];
+
+$fieldOptions2 = [
+    'options' => ['class' => 'form-group has-feedback'],
+    'inputTemplate' => "{input}<span class='glyphicon glyphicon-lock form-control-feedback'></span>",
+];
 ?>
-<div class="site-login">
 
+<div class="login-box">
+    <div class="login-logo">
+        <a href="#">Login</b></a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">Harap Login Untuk Memulai</p>
 
+        <?php $form = ActiveForm::begin(['id' => 'login-form', 'enableClientValidation' => false]); ?>
 
-            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
-                   <?= $form->errorSummary($model) ?> <!-- ADDED HERE -->
+        <?= $form->errorSummary($model); ?> <!-- ADDED HERE -->
+        <?= $form
+            ->field($model, 'username', $fieldOptions1)
+            ->label(false)
+            ->textInput(['placeholder' => $model->getAttributeLabel('username')]); ?>
 
-                   <div class="row p-b-30">
-                            <div class="col-12">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text bg-success text-white" id="basic-addon1"><i class="mdi mdi-account"></i></span>
-                                    </div>
-                                    <input name='LoginForm[username]' type="text" class="form-control form-control-lg" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" required="">
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text bg-warning text-white" id="basic-addon2"><i class="mdi mdi-pencil"></i></span>
-                                    </div>
-                                    <input  name='LoginForm[password]' type="password" class="form-control form-control-lg" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" required="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row ">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <div class="p-t-20">
-                                        <button class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" type="submit">Login</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-            <?php ActiveForm::end(); ?>
-  </div>
+        <?= $form
+            ->field($model, 'password', $fieldOptions2)
+            ->label(false)
+            ->passwordInput(['placeholder' => $model->getAttributeLabel('password')]); ?>
+
+        <div class="row">
+            <div class="col-xs-8">
+                <?= $form->field($model, 'rememberMe')->checkbox(); ?>
+          
+                       </div>
+                       
+        
+</div>
+        <?= Html::submitButton('Login', ['class' => 'btn btn-primary btn-block btn-flat', 'name' => 'login-button']); ?>
+
+  
+   
+     
+        <?php ActiveForm::end(); ?>
+       
+
+    </div>
+    <!-- /.login-box-body -->
+           
+
+</div><!-- /.login-box -->

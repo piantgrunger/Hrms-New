@@ -244,7 +244,7 @@ class Generator extends \yii\gii\Generator
         if ($column->phpType === 'boolean') {
             return "\$form->field(\$model, '$attribute')->checkbox()";
         } elseif ($column->type === 'text') {
-            return "\$form->field(\$model, '$attribute')->textarea(['rows' => 6])";
+            return "\$form->field(\$model, '$attribute')->textArea(['rows'=>12,'style'=>'height: 120px;',])";
         } 
         
         else {

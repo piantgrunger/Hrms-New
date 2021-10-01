@@ -87,6 +87,9 @@ class Pelamar extends \yii\db\ActiveRecord
             'tingkat_pendidikan_terakhir' => Yii::t('app', 'Tingkat Pendidikan Terakhir'),
             'nama_pendidikan_terakhir' => Yii::t('app', 'Nama Pendidikan Terakhir'),
             'nilai_pendidikan_terakhir' => Yii::t('app', 'Nilai Pendidikan Terakhir'),
+            'lowongan.divisi.nama' =>'Divisi',
+            'lowongan.jabatan.nama'=>'Jabatan',
+       
         ];
     }
 
@@ -99,4 +102,16 @@ class Pelamar extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Lowongan::className(), ['id' => 'id_lowongan']);
     }
+    public function getPelaksanaanTest()
+    {
+        return $this->hasMany(PelaksanaanTes::className(), ['id_pelamar' => 'id']);
+
+    }
+
+    public function getNilai_test_rata_rata()
+    {
+        return $this->getPelaksanaanTest()->sum('nilai') / count($this->pelaksanaanTest);
+
+    }
+    
 }

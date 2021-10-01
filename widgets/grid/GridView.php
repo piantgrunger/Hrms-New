@@ -10,7 +10,7 @@ use app\widgets\LinkPager;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-class GridView extends \yii\grid\GridView
+class GridView extends \kartik\grid\GridView
 {
     /**
      * Apply class `table-responsive` if enabled.

@@ -16,11 +16,11 @@ use yii\bootstrap4\ActiveForm;
 
     <?php $form->field($model, 'type')->textInput() ?>
 
-    <?php $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+    <?php $form->field($model, 'description')->textArea(['rows'=>12,'style'=>" height: 120px;",]) ?>
 
     <?php $form->field($model, 'rule_name')->textInput(['maxlength' => true]) ?>
 
-    <?php $form->field($model, 'data')->textarea(['rows' => 6]) ?>
+    <?php $form->field($model, 'data')->textArea(['rows'=>12,'style'=>" height: 120px;",]) ?>
 
     <?php $form->field($model, 'created_at')->textInput() ?>
 

@@ -9,7 +9,7 @@ use yii\helpers\Html;
  * @author Basil Suter <basil@nadar.io>
  * @since 1.0.0
  */
-    class ActionColumn extends \yii\grid\ActionColumn
+    class ActionColumn extends \kartik\grid\ActionColumn
     {
     public function init()
     {

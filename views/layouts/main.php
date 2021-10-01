@@ -4,14 +4,9 @@
 /* @var $content string */
 
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use kartik\nav\NavX;
-use yii\bootstrap\NavBar;
 use yii\bootstrap4\Breadcrumbs;
-use app\widgets\Alert;
-use yii\helpers\Url;
 use app\assets\AppAsset;
-$this->title = 'HRMS';
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -26,55 +21,59 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
- 
-<div class="container-scroller">
-      <!-- partial:partials/_navbar.html -->
-     <?=$this->render('header')?>  
-      <!-- partial -->
-      <div class="container-fluid page-body-wrapper">
-        <!-- partial:partials/_sidebar.html -->
-        <?=$this->render('left')?>  
 
-        <!-- partial -->
-        <div class="main-panel">
-          <div class="content-wrapper">
-            <div class="row" id="proBanner">
-
-              <div class="col-12">
-                <span class="d-flex align-items-center text-right">
-                <nav aria-label="breadcrumb">
-                   <?= Breadcrumbs::widget([
-                        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                      ]) ?>
-		          </nav>        </span>
-              </div>
-            </div>
-            <div class="card" id="proBanner">
-
-              <div class="card-body">
-
-            <?=$content?>
-              </div>
-              
-          </div>
-          <!-- content-wrapper ends -->
-          <!-- partial:partials/_footer.html -->
-          <footer class="footer">
-            <div class="container-fluid clearfix">
-              <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © AlfianNaufal.id <?=date('Y')?></span>
-              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> </span>
-            </div>
-          </footer>
-          <!-- partial -->
-        </div>
-        <!-- main-panel ends -->
+<body>
+  <div id="app">
+    <div class="main-wrapper">
+      <div class="navbar-bg"></div>
+      <nav class="navbar navbar-expand-lg main-navbar">
+        <?=$this->render("topnav")?>
+      </nav>
+      <div class="main-sidebar">
+      <?=$this->render("sidebar")?>
       </div>
-      <!-- page-body-wrapper ends -->
+
+      <!-- Main Content -->
+      <div class="main-content">
+      <section class="section">
+  <div class="section-header">
+  <?php if (isset($this->blocks['content-header'])) { ?>
+            <h1><?= $this->blocks['content-header'] ?></h1>
+        <?php } else { ?>
+            <h1>
+                <?php
+                if ($this->title !== null) {
+                    echo \yii\helpers\Html::encode($this->title);
+                } else {
+                    echo \yii\helpers\Inflector::camel2words(
+                        \yii\helpers\Inflector::id2camel($this->context->module->id)
+                    );
+                    echo ($this->context->module->id !== \Yii::$app->id) ? '<small>Module</small>' : '';
+                } ?>
+            </h1>
+        <?php } ?>
+
+        <?=
+        Breadcrumbs::widget(
+            [
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            ]
+        ) ?>
+  </div>
+  <div class="section-body">
+     <?=$content?>
+  </div>
+</section>
+       
+      
+      </div>
+      <footer class="main-footer">
+
+      </footer>
     </div>
-    
+  </div>
 
 <?php $this->endBody() ?>
-
 </body>
 </html>
 <?php $this->endPage() ?>

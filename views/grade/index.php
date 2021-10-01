@@ -3,10 +3,10 @@
 
 use hscstudio\mimin\components\Mimin;
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 
 
-$gridColumns=[['class' => 'yii\grid\SerialColumn'], 
+$gridColumns=[['class' => 'kartik\grid\SerialColumn'], 
             'kode',
             'nama',
             'gaji_pokok:decimal',

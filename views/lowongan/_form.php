@@ -43,7 +43,7 @@ $dataJabatan = ArrayHelper::map(Jabatan::find()->select(['id','kode'=>"concat(ko
     ) ?>
     <?= $form->field($model, 'jumlah')->textInput() ?>
 
-    <?= $form->field($model, 'keterangan')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'keterangan')->textArea(['rows'=>12,'style'=>" height: 120px;",]) ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>

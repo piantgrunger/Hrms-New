@@ -3,14 +3,27 @@
 
 use hscstudio\mimin\components\Mimin;
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\widgets\Pjax;
 
-$gridColumns=[['class' => 'yii\grid\SerialColumn'], 
+$gridColumns=[['class' => 'kartik\grid\SerialColumn'], 
             'kode',
-            'id_lowongan',
+            'lowongan.kode',
+            'lowongan.divisi.nama',
+            'lowongan.jabatan.nama',
             'nama_lengkap',
-            'nama_panggilan',
+            [
+                'attribute' => 'Nilai Tes',
+                'class' => 'kartik\grid\ExpandRowColumn',
+                'value' => function ($model, $key, $index, $column) {
+                    return GridView::ROW_COLLAPSED;
+                },
+                'detail' => function ($model, $key, $index, $column) {
+                    return $this->render('_item_view', ['model'=>$model->pelaksanaanTest]);
+                },
+            ],
+            'nilai_test_rata_rata',
+//            'nama_panggilan',
             // 'tempat_lahir',
             // 'tanggal_lahir',
             // 'jenis_kelamin',

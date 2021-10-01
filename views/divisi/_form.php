@@ -17,7 +17,7 @@ use yii\bootstrap4\ActiveForm;
 
     <?= $form->field($model, 'nama')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'alamat')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'alamat')->textArea(['rows'=>12,'style'=>" height: 120px;",]) ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>

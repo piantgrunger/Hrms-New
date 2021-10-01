@@ -1,5 +1,4 @@
 <?php
-
 namespace app\widgets;
 
 use Yii;
@@ -16,13 +15,13 @@ class Menu extends \yii\widgets\Menu
     /**
      * @inheritdoc
      */
-    public $linkTemplate = '<a href="{url}" class="nav-link " >{label}  {icon} </a>';
+    public $linkTemplate = '<li class="{show}"><a href="{url}" class="nav-link " >{icon} {label}</a></li>';
     /**
      * @inheritdoc
      * Styles all labels of items on sidebar by AdminLTE
      */
-    public $labelTemplate = '<span class="menu-title">{label}</span>';
-    public $submenuTemplate = "\n<div class='collapse' id={id}> <ul  class='nav flex-column sub-menu'>\n{items} \n</ul></div>\n";
+    public $labelTemplate = '<span class="hide-menu">{label}</span>';
+    public $submenuTemplate = "\n<ul aria-expanded='false' class='dropdown-menu' >\n{items}\n</ul>\n";
     public $activateParents = true;
     public $defaultIconHtml = '<i class="fa fa-circle-o"></i> ';
 
@@ -30,7 +29,7 @@ class Menu extends \yii\widgets\Menu
      * @var string is prefix that will be added to $item['icon'] if it exist.
      * By default uses for Font Awesome (http://fontawesome.io/)
      */
-    public static $iconClassPrefix = 'mdi mdi-';
+    public static $iconClassPrefix = 'fa fa-';
 
     private $noDefaultAction;
     private $noDefaultRoute;
@@ -60,11 +59,10 @@ class Menu extends \yii\widgets\Menu
         }
         $items = $this->normalizeItems($this->items, $hasActiveChild);
         if (!empty($items)) {
-            //    $options = $this->options;
-            //  $tag = ArrayHelper::remove($options, 'tag', 'ul');
+            $options = $this->options;
+            $tag = ArrayHelper::remove($options, 'tag', 'ul');
 
-            //echo Html::tag($tag, $this->renderItems($items), $options);
-            echo $this->renderItems($items);
+            echo Html::tag($tag, $this->renderItems($items), $options);
         }
     }
 
@@ -74,8 +72,8 @@ class Menu extends \yii\widgets\Menu
     protected function renderItem($item)
     {
         if (isset($item['items'])) {
-            $labelTemplate = '<li class="nav-item "> <a  class="nav-link collapsed" data-toggle="collapse" href="#{id}" aria-expanded="true" aria-controls="{id}"> {label} {icon}</a>';
-            $linkTemplate = '<li class="nav-item "><a  class="nav-link collapsed" data-toggle="collapse" href="#{id}" aria-expanded="true" aria-controls="{id}"> {label} {icon} </a>';
+            $labelTemplate = '<li class="{show}"> <a href="{url}" class="nav-link has-dropdown">{icon} {label} </a>';
+            $linkTemplate = '<li class="{show}"><a href="{url}" class="nav-link has-dropdown">{icon} {label} </a>';
         } else {
             $labelTemplate = $this->labelTemplate;
             $linkTemplate = $this->linkTemplate;
@@ -84,11 +82,9 @@ class Menu extends \yii\widgets\Menu
         $replacements = [
             '{label}' => strtr($this->labelTemplate, ['{label}' => $item['label'],]),
             '{icon}' => empty($item['icon']) ? $this->defaultIconHtml
-                : '<i class="' . self::$iconClassPrefix . $item['icon'] . ' menu-icon "></i> ',
+                : '<i class="' . self::$iconClassPrefix . $item['icon'] . '"></i> ',
             '{url}' => isset($item['url']) ? Url::to($item['url']) : 'javascript:void(0);',
-            '{id}' => isset($item['id']) ? $item['id'] : "",
-       //     '{active}' => $this->isItemActive($item) ? "active" : '',
-             
+            '{show}' => $item['active'] ? "active" : '',
         ];
 
         $template = ArrayHelper::getValue($item, 'template', isset($item['url']) ? $linkTemplate : $labelTemplate);
@@ -107,7 +103,7 @@ class Menu extends \yii\widgets\Menu
         $lines = [];
         foreach ($items as $i => $item) {
             $options = array_merge($this->itemOptions, ArrayHelper::getValue($item, 'options', []));
-            $tag = ArrayHelper::remove($options, 'tag', 'li class="nav-item"');
+            $tag = ArrayHelper::remove($options, 'tag', 'li class="sidebar-item"');
             $class = [];
             if ($item['active']) {
                 $class[] = $this->activeCssClass;
@@ -128,9 +124,8 @@ class Menu extends \yii\widgets\Menu
             $menu = $this->renderItem($item);
             if (!empty($item['items'])) {
                 $menu .= strtr($this->submenuTemplate, [
-         //           '{show}' => $this->isItemActive($item) ? "" : 'collapse',
+                    '{show}' => $item['active'] ? "active" : '',
                     '{items}' => $this->renderItems($item['items']),
-                    '{id}' => isset($item['id']) ? $item['id'] : "",
                 ]);
             }
             $lines[] = Html::tag($tag, $menu, $options);
@@ -143,7 +138,6 @@ class Menu extends \yii\widgets\Menu
      */
     protected function normalizeItems($items, &$active)
     {
-        
         foreach ($items as $i => $item) {
             if (isset($item['visible']) && !$item['visible']) {
                 unset($items[$i]);
@@ -191,8 +185,6 @@ class Menu extends \yii\widgets\Menu
      */
     protected function isItemActive($item)
     {
-        return false;
-        /*
         if (isset($item['url']) && is_array($item['url']) && isset($item['url'][0])) {
             $route = $item['url'][0];
             if ($route[0] !== '/' && Yii::$app->controller) {
@@ -213,6 +205,5 @@ class Menu extends \yii\widgets\Menu
             return true;
         }
         return false;
-        */
     }
 }

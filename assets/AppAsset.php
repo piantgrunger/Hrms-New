@@ -18,27 +18,24 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-
-
-        'template/vendors/mdi/css/materialdesignicons.min.css',
-        'template/vendors/css/vendor.bundle.base.css',
-        'template/css/style.css',
-        'https://use.fontawesome.com/releases/v5.3.1/css/all.css',
+        'https://use.fontawesome.com/releases/v5.7.2/css/all.css',
+        'css/site.css',
+        'css/style.css',
+        'css/components.css',
     ];
     public $js = [
-        'js/yii_overrides.js',
-      //  "template/vendors/js/vendor.bundle.base.js",
-        "template/vendors/chart.js/Chart.min.js",
-        "template/js/off-canvas.js",
-         "template/js/hoverable-collapse.js",
-         "template/js/misc.js",
+        'https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js',
+        'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js',
+      'js/yii_overrides.js',
+       'js/stisla.js',
+      'js/scripts.js',
     ];
     public $depends = [
-       'yii\web\YiiAsset',
-    'yii\bootstrap4\BootstrapAsset',
-    //'rmrevin\yii\fontawesome\AssetBundle',
-    
+        'yii\web\YiiAsset',
+        'yii\bootstrap4\BootstrapAsset',
+      //  'rmrevin\yii\fontawesome\cdn\AssetBundle',
         //additional import of third party alert project
         'app\assets\SweetAlertAsset',
+
     ];
 }
