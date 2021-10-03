@@ -107,6 +107,10 @@ class Pelamar extends \yii\db\ActiveRecord
         return $this->hasMany(PelaksanaanTes::className(), ['id_pelamar' => 'id']);
 
     }
+    public function getPegawai()
+    {
+        return $this->hasOne(Pegawai::className(), ['id_pelamar' => 'id']);
+    }
 
     public function getNilai_test_rata_rata()
     {

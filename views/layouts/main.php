@@ -5,6 +5,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap4\Breadcrumbs;
+use app\widgets\Alert;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
@@ -61,6 +62,8 @@ AppAsset::register($this);
         ) ?>
   </div>
   <div class="section-body">
+  <?=Alert::widget()?>
+      
      <?=$content?>
   </div>
 </section>

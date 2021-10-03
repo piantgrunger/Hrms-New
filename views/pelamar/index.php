@@ -40,9 +40,16 @@ $gridColumns=[['class' => 'kartik\grid\SerialColumn'],
             // 'tingkat_pendidikan_terakhir',
             // 'nama_pendidikan_terakhir:ntext',
             // 'nilai_pendidikan_terakhir',
+            ['attribute' => 'Status',
+             'format' =>'raw',
+              'value'  => function($model) {
+                  return  is_null($model->pegawai)? Html::a('Terima Pegawai',['diterima','id'=>$model->id],['class'=>'btn  btn-info ']):"Pegawai Sudah Diterima";
+              }
+            
+            ],
 
          ['class' => 'app\widgets\grid\ActionColumn',   'template' => Mimin::filterActionColumn([
-              'update','delete','view'],$this->context->route),    ],    ];
+              'update','delete','view'],$this->context->route) ,    ],    ];
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\PelamarSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */

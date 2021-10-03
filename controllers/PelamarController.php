@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Pegawai;
 use Yii;
 use app\models\Pelamar;
 use app\models\PelamarSearch;
@@ -54,6 +55,43 @@ class PelamarController extends Controller
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
+    }
+
+
+    public function actionDiterima($id)
+    {
+        $model = $this->findModel($id);
+        if(is_null($model->pegawai))
+        {        
+          $pegawai = new Pegawai();
+          $pegawai->id_pelamar = $model->id;
+          foreach($model->attributes  as  $attribute => $val)
+          {
+              if(($attribute!='id')&&($attribute!='kode') &&($attribute!=='id_lowongan'))
+              {
+                  $pegawai->{$attribute} = $val;
+              }
+
+          }
+          $pegawai->nip = $model->kode;
+          $pegawai->id_divisi = $model->lowongan->id_divisi;
+          $pegawai->id_jabatan = $model->lowongan->id_jabatan;
+          
+          if($pegawai->save())
+          {
+            Yii::$app->session->setFlash('success', "Pegawai Telah Diterima");
+          } else {
+            Yii::$app->session->setFlash('error', implode ( "<br />" , \yii\helpers\ArrayHelper::getColumn ( $pegawai->errors , 0 , false ) ) );
+              
+          }
+         return $this->redirect(['index']);
+    
+        } else {
+            Yii::$app->session->setFlash('error', "Pegawai Sudah Diterima Sebelumnya");
+            return $this->redirect(['index']);
+
+        }  
+
     }
 
     /**
