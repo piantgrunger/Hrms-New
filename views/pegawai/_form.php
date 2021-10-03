@@ -8,6 +8,7 @@ use yii\helpers\ArrayHelper;
 use app\models\Divisi;
 use app\models\Jabatan;
 use app\models\Grade;
+use app\models\Shift;
 use kartik\datecontrol\DateControl;
 
 $dataGrade = ArrayHelper::map(Grade::find()->select(['id','kode'=>"concat(kode,' - ',nama)"])->asArray()->all(), 'id','kode');
@@ -68,7 +69,13 @@ $dataDepartemen = ArrayHelper::map(Departemen::find()->select(['id','kode'=>"con
 
     <?= $form->field($model, 'tanggal_lahir')->widget(DateControl::className()) ?>
 
-    <?= $form->field($model, 'jenis_kelamin')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'jenis_kelamin')->widget(Select2::className(),[
+        'data' =>['Laki-Laki'=>'Laki-laki' , 'Perempuan' =>'Perempuan'],
+        'options' => [
+        'placeholder' => 'Pilih Jenis Kelamin ...',
+    ]
+    ]
+    ) ?> 
 
     <?= $form->field($model, 'no_ktp')->textInput(['maxlength' => true]) ?>
 
@@ -100,7 +107,7 @@ $dataDepartemen = ArrayHelper::map(Departemen::find()->select(['id','kode'=>"con
     <?= $form->field($model, 'status_pernikahan')->widget(Select2::className(),[
         'data' =>['Lajang'=>'Lajang' , 'Menikah' =>'Menikah' ,'Janda' =>'Janda','Duda' =>'Duda'],
         'options' => [
-        'placeholder' => 'Pilih Jenis Kelamin ...',
+        'placeholder' => 'Pilih Status Pernikahan ...',
     ]
     ]
     )  
@@ -127,6 +134,15 @@ $dataDepartemen = ArrayHelper::map(Departemen::find()->select(['id','kode'=>"con
     <?= $form->field($model, 'nama_pendidikan_terakhir')->textArea(['rows'=>12,'style'=>'height: 120px;',]) ?>
 
     <?= $form->field($model, 'nilai_pendidikan_terakhir')->textInput(['maxlength' => true]) ?>
+
+    
+    <?= $form->field($model, 'id_shift')->widget(Select2::className(),[
+        'data' =>(ArrayHelper::map(Shift::find()->asArray()->all(),'id','nama')),
+        'options' => [
+        'placeholder' => 'Pilih Shift ...',
+    ]
+    ]
+    )   ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>

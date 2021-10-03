@@ -58,7 +58,7 @@ class Pegawai extends \yii\db\ActiveRecord
         return [
             [['nip', 'id_divisi', 'id_jabatan', 'nama_lengkap', 'nama_panggilan', 'tempat_lahir', 'tanggal_lahir', 'jenis_kelamin', 'no_ktp', 'agama', 'status_pernikahan', 'tingkat_pendidikan_terakhir'], 'required'],
             [['id_pelamar', 'id_divisi', 'id_departemen', 'id_jabatan', 'id_grade'], 'integer'],
-            [['tanggal_lahir'], 'safe'],
+            [['tanggal_lahir','id_shift'], 'safe'],
             [['alamat_ktp', 'alamat_domisili', 'riwayat_penyakit', 'nama_pendidikan_terakhir'], 'string'],
             [['nilai_pendidikan_terakhir'], 'number'],
             [['nip', 'nama_lengkap', 'nama_panggilan', 'tempat_lahir', 'jenis_kelamin', 'no_ktp', 'npwp', 'no_bpjs_kesehatan', 'no_bpjs_ketenagakerjaan', 'no_hp', 'email', 'agama', 'status_pernikahan'], 'string', 'max' => 255],

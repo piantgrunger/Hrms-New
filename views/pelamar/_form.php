@@ -76,7 +76,7 @@ $data = ArrayHelper::map(Lowongan::find()->select(['lowongan.id','kode'=>"concat
     <?= $form->field($model, 'status_pernikahan')->widget(Select2::className(),[
         'data' =>['Lajang'=>'Lajang' , 'Menikah' =>'Menikah' ,'Janda' =>'Janda','Duda' =>'Duda'],
         'options' => [
-        'placeholder' => 'Pilih Jenis Kelamin ...',
+        'placeholder' => 'Pilih Status Pernikahan ...',
     ]
     ]
     )  ?>
