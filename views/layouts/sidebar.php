@@ -65,6 +65,8 @@
                 'id' => 'hrd',
                 'items' => [
                   ['label' => 'Jenis Absen', 'icon' => 'calendar-check', 'url' => ['/jenis-absen/index'], 'visible' => !Yii::$app->user->isGuest],
+                  ['label' => 'Hari Libur', 'icon' => 'calendar-alt', 'url' => ['/hari-libur/index'], 'visible' => !Yii::$app->user->isGuest],
+             
                   ['label' => 'Shift', 'icon' => 'clock', 'url' => ['/shift/index'], 'visible' => !Yii::$app->user->isGuest],
                   ['label' => 'Absen', 'icon' => 'calendar', 'url' => ['/absen/index'], 'visible' => !Yii::$app->user->isGuest],
     
