@@ -70,6 +70,8 @@
                   ['label' => 'Shift', 'icon' => 'clock', 'url' => ['/shift/index'], 'visible' => !Yii::$app->user->isGuest],
                   ['label' => 'Absen', 'icon' => 'calendar', 'url' => ['/absen/index'], 'visible' => !Yii::$app->user->isGuest],
                   ['label' => 'Surat Lembur', 'icon' => 'hourglass', 'url' => ['/surat-lembur/index'], 'visible' => !Yii::$app->user->isGuest],
+                  ['label' => 'Surat Cuti', 'icon' => 'envelope', 'url' => ['/surat-cuti/index'], 'visible' => !Yii::$app->user->isGuest],
+                  ['label' => 'Tukar Absen', 'icon' => 'random', 'url' => ['/tukar-absen/index'], 'visible' => !Yii::$app->user->isGuest],
     
     
                 ], ],
