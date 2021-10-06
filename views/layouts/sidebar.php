@@ -85,7 +85,9 @@
                   'id' => 'money',
                   'items' => [
                     ['label' => 'Tunjangan', 'icon' => 'plus', 'url' => ['/tunjangan/index'], 'visible' => !Yii::$app->user->isGuest],
-                     ], ],
+                    ['label' => 'Potongan', 'icon' => 'minus', 'url' => ['/potongan/index'], 'visible' => !Yii::$app->user->isGuest],
+                    
+                  ], ],
       
 
                 ];
