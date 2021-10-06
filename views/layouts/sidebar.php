@@ -77,7 +77,16 @@
     
     
                 ], ],
-    
+                [
+                  'visible' => !Yii::$app->user->isGuest,
+                  'label' => 'Payroll',
+                  'icon' => 'money-check-alt',
+                  'url' => '#',
+                  'id' => 'money',
+                  'items' => [
+                    ['label' => 'Tunjangan', 'icon' => 'plus', 'url' => ['/tunjangan/index'], 'visible' => !Yii::$app->user->isGuest],
+                     ], ],
+      
 
                 ];
 
