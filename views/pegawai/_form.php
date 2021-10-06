@@ -124,7 +124,7 @@ $dataDepartemen = ArrayHelper::map(Departemen::find()->select(['id','kode'=>"con
     <?= $form->field($model, 'riwayat_penyakit')->textArea(['rows'=>12,'style'=>'height: 120px;',]) ?>
 
     <?= $form->field($model, 'tingkat_pendidikan_terakhir')->widget(Select2::className(),[
-        'data' =>(ArrayHelper::map(app\models\Sekolah::find()->asArray()->all(),'kode','nama')),
+        'data' =>(ArrayHelper::map(app\models\Pendidikan::find()->asArray()->all(),'kode','nama')),
         'options' => [
         'placeholder' => 'Pilih Pendidikan Terakhir ...',
     ]

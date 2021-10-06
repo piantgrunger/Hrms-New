@@ -30,7 +30,7 @@
                 ['label' => 'Grade', 'icon' => 'list', 'url' => ['/grade/index'], 'visible' => !Yii::$app->user->isGuest],
   
                 ['label' => 'Jabatan', 'icon' => 'sitemap', 'url' => ['/jabatan/index'], 'visible' => !Yii::$app->user->isGuest],
-                ['label' => 'Sekolah', 'icon' => 'school', 'url' => ['/sekolah/index'], 'visible' => !Yii::$app->user->isGuest],
+                ['label' => 'Pendidikan', 'icon' => 'school', 'url' => ['/sekolah/index'], 'visible' => !Yii::$app->user->isGuest],
                
           
                ], ],

@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Sekolah */
+/* @var $model app\models\Pendidikan */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="sekolah-form">
+<div class="Pendidikan-form">
 
     <?php $form = ActiveForm::begin(); ?>
         <?= $form->errorSummary($model) ?> <!-- ADDED HERE -->

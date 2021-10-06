@@ -5,13 +5,13 @@ use yii\widgets\DetailView;
 use hscstudio\mimin\components\Mimin;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Sekolah */
+/* @var $model app\models\Pendidikan */
 
 $this->title = $model->kode;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Daftar Sekolah'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Daftar Pendidikan'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="sekolah-view">
+<div class="Pendidikan-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
