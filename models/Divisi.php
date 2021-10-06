@@ -28,8 +28,9 @@ class Divisi extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['kode', 'nama', 'alamat'], 'required'],
+            [['kode', 'nama', 'alamat','umk'], 'required'],
             [['alamat'], 'string'],
+            [['umk'],'number'],
             [['kode', 'nama'], 'string', 'max' => 20],
             [['kode'], 'unique'],
             [['nama'], 'unique'],

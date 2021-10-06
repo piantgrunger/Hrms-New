@@ -31,6 +31,10 @@ class Tunjangan extends \yii\db\ActiveRecord
         return [
             [['kode', 'nama', 'jenis', 'jumlah'], 'required'],
             [['jumlah'], 'number'],
+            [['id_shift'],'integer'],
+            [['id_shift'],'required','when'=>function($model) {
+                return $model->jenis == 'Tunjangan Premi Shift';
+            },'enableClientValidation' => false ],
             [['kode', 'nama', 'jenis'], 'string', 'max' => 255],
             [['kode'], 'unique'],
             [['nama'], 'unique'],

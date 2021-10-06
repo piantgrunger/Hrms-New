@@ -8,7 +8,8 @@ use yii\widgets\Pjax;
 
 $gridColumns=[['class' => 'kartik\grid\SerialColumn'], 
             'pegawai.nama_lengkap',
-            'tanggal',
+            'tanggal:date',
+            'shift.nama',
             'jenisAbsen.nama',
             'masuk_kerja',
              'pulang_kerja',

@@ -17,7 +17,8 @@ class m211005_085219_create_tukar_absen_table extends Migration
             'id_pegawai' => $this->integer()->notNull(),
             'tanggal' =>  $this->date()->notNull(),
             'id_pengganti' => $this->integer()->notNull(),
-            'keterangan' => $this->text()->notNull(),"FOREIGN KEY (id_pegawai) REFERENCES pegawai(id) ",
+            'keterangan' => $this->text()->notNull()
+            ,"FOREIGN KEY (id_pegawai) REFERENCES pegawai(id) ",
             "FOREIGN KEY (id_pengganti) REFERENCES pegawai(id) ",
         
 

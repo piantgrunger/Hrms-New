@@ -74,6 +74,7 @@
                   ['label' => 'Surat Lembur', 'icon' => 'hourglass', 'url' => ['/surat-lembur/index'], 'visible' => !Yii::$app->user->isGuest],
                   ['label' => 'Surat Cuti', 'icon' => 'envelope', 'url' => ['/surat-cuti/index'], 'visible' => !Yii::$app->user->isGuest],
                   ['label' => 'Tukar Absen', 'icon' => 'random', 'url' => ['/tukar-absen/index'], 'visible' => !Yii::$app->user->isGuest],
+                  ['label' => 'Jadwal Kerja', 'icon' => 'calendar-plus', 'url' => ['/jadwal-kerja/index'], 'visible' => !Yii::$app->user->isGuest],
     
     
                 ], ],

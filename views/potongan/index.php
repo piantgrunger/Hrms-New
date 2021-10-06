@@ -10,7 +10,7 @@ $gridColumns=[['class' => 'kartik\grid\SerialColumn'],
             'kode',
             'nama',
             'jenis',
-            'jumlah',
+            'jumlah:decimal',
 
          ['class' => 'app\widgets\grid\ActionColumn',   'template' => Mimin::filterActionColumn([
               'update','delete','view'],$this->context->route),    ],    ];

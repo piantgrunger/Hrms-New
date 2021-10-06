@@ -9,6 +9,7 @@ use yii\widgets\Pjax;
 $gridColumns=[['class' => 'kartik\grid\SerialColumn'], 
             'kode',
             'nama',
+            'umk:decimal',
             'alamat:ntext',
 
          ['class' => 'app\widgets\grid\ActionColumn',   'template' => Mimin::filterActionColumn([
