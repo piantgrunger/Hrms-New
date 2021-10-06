@@ -18,7 +18,7 @@ class DepartemenSearch extends Departemen
     public function rules()
     {
         return [
-            [['id', 'id_divisi'], 'integer'],
+            [['id', ], 'integer'],
             [['kode', 'nama'], 'safe'],
         ];
     }
@@ -60,7 +60,6 @@ class DepartemenSearch extends Departemen
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'id_divisi' => $this->id_divisi,
         ]);
 
         $query->andFilterWhere(['like', 'kode', $this->kode])
