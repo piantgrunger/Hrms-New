@@ -7,7 +7,6 @@ use kartik\grid\GridView;
 use yii\widgets\Pjax;
 
 $gridColumns=[['class' => 'kartik\grid\SerialColumn'], 
-            'divisi.nama',
             'kode',
             'nama',
         

@@ -18,14 +18,6 @@ $data = ArrayHelper::map(Divisi::find()->select(['id','kode'=>"concat(kode,' - '
     <?php $form = ActiveForm::begin(); ?>
         <?= $form->errorSummary($model) ?> <!-- ADDED HERE -->
 
-    <?= $form->field($model, 'id_divisi')->widget(Select2::className(),[
-        'data' =>$data,
-        'options' => [
-        'placeholder' => 'Pilih Divisi ...',
-    ]
-    ]
-    ) ?>
-
     <?= $form->field($model, 'kode')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'nama')->textInput(['maxlength' => true]) ?>

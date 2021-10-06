@@ -31,13 +31,11 @@ class Departemen extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_divisi', 'kode', 'nama'], 'required'],
-            [['id_divisi'], 'integer'],
+            [[ 'kode', 'nama'],],
             [['kode'], 'string', 'max' => 20],
             [['nama'], 'string', 'max' => 50],
             [['kode'], 'unique'],
             [['nama'], 'unique'],
-            [['id_divisi'], 'exist', 'skipOnError' => true, 'targetClass' => Divisi::className(), 'targetAttribute' => ['id_divisi' => 'id']],
         ];
     }
 
@@ -53,15 +51,5 @@ class Departemen extends \yii\db\ActiveRecord
             'nama' => 'Nama',
             'divisi.nama' => 'Divisi'
         ];
-    }
-
-    /**
-     * Gets query for [[Divisi]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getDivisi()
-    {
-        return $this->hasOne(Divisi::className(), ['id' => 'id_divisi']);
     }
 }
