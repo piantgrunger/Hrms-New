@@ -36,6 +36,8 @@ class Pelamar extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+    use \mdm\behaviors\ar\RelationTrait;
+
     public static function tableName()
     {
         return 'pelamar';
@@ -117,5 +119,15 @@ class Pelamar extends \yii\db\ActiveRecord
         return $this->getPelaksanaanTest()->sum('nilai') / count($this->pelaksanaanTest);
 
     }
+
+    public function getDetailPelamarAnaks()
+    {
+        return $this->hasMany(DetailPelamarAnak::className(),['id_pelamar'=>'id']);
+    }
     
+    public function setDetailPelamarAnaks($value)
+    {
+         $this->loadRelated('detailPelamarAnaks', $value);
+    }
+
 }

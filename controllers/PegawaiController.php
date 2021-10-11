@@ -65,13 +65,27 @@ class PegawaiController extends Controller
     {
         $model = new Pegawai();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $transaction = Yii::$app->db->beginTransaction();
+            try {
+                $model->detailPegawaiAnaks = Yii::$app->request->post('DetailPegawaiAnak', []);
+                if (($model->save())) {
+                    $transaction->commit();
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+            } catch (\Exception $ecx) {
+                $transaction->rollBack();
+                throw $ecx;
+            }
+            return $this->render('create', [
+                'model' => $model,
+            ]);
         } else {
             return $this->render('create', [
                 'model' => $model,
             ]);
         }
+ 
     }
 
     /**
@@ -84,13 +98,27 @@ class PegawaiController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $transaction = Yii::$app->db->beginTransaction();
+            try {
+                $model->detailPegawaiAnaks = Yii::$app->request->post('DetailPegawaiAnak', []);
+                if (($model->save())) {
+                    $transaction->commit();
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+            } catch (\Exception $ecx) {
+                $transaction->rollBack();
+                throw $ecx;
+            }
+            return $this->render('update', [
+                'model' => $model,
+            ]);
         } else {
             return $this->render('update', [
                 'model' => $model,
             ]);
         }
+ 
     }
 
     /**

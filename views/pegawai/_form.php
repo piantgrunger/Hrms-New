@@ -10,12 +10,29 @@ use app\models\Jabatan;
 use app\models\Grade;
 use app\models\Shift;
 use kartik\datecontrol\DateControl;
+use yii\bootstrap4\Tabs;
+
 
 $dataGrade = ArrayHelper::map(Grade::find()->select(['id','kode'=>"concat(kode,' - ',nama)"])->asArray()->all(), 'id','kode');
 $dataDivisi = ArrayHelper::map(Divisi::find()->select(['id','kode'=>"concat(kode,' - ',nama)"])->asArray()->all(), 'id','kode');
 $dataJabatan = ArrayHelper::map(Jabatan::find()->select(['id','kode'=>"concat(kode,' - ',nama)"])->asArray()->all(), 'id','kode');
 $dataDepartemen = ArrayHelper::map(Departemen::find()->select(['id','kode'=>"concat(kode,' - ',nama)"])->asArray()->all(), 'id','kode');
 $dataDepartemen = ArrayHelper::map(Departemen::find()->select(['id','kode'=>"concat(kode,' - ',nama)"])->asArray()->all(), 'id','kode');
+
+$form = ActiveForm::begin();
+$items = [
+    [
+        'label' => 'Keluarga',
+        'content' => $this->render('_tab_anak.php', ['model' => $model, 'form' => $form]),
+        'active' => true
+    ],
+    [
+        'label' => 'Pendidikan',
+        'content' => $this->render('_tab_pendidikan.php', ['model' => $model, 'form' => $form]),
+    
+    ],
+
+];
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Pegawai */
@@ -24,7 +41,10 @@ $dataDepartemen = ArrayHelper::map(Departemen::find()->select(['id','kode'=>"con
 
 <div class="pegawai-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+
+<div class="row">
+<div class="col-md-6">
+
         <?= $form->errorSummary($model) ?> <!-- ADDED HERE -->
 
     <?= $form->field($model, 'nip')->textInput(['maxlength' => true]) ?>
@@ -85,33 +105,29 @@ $dataDepartemen = ArrayHelper::map(Departemen::find()->select(['id','kode'=>"con
 
     <?= $form->field($model, 'no_bpjs_ketenagakerjaan')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'alamat_ktp')->textArea(['rows'=>12,'style'=>'height: 120px;',]) ?>
+</div>
 
-    <?= $form->field($model, 'alamat_domisili')->textArea(['rows'=>12,'style'=>'height: 120px;',]) ?>
+<div class="col-md-6">
 
-    <?= $form->field($model, 'no_hp')->textInput(['maxlength' => true]) ?>
+<?= $form->field($model, 'alamat_ktp')->textArea(['rows'=>12,'style'=>'height: 120px;',]) ?>
 
-    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+<?= $form->field($model, 'alamat_domisili')->textArea(['rows'=>12,'style'=>'height: 120px;',]) ?>
 
-    <?= $form->field($model, 'agama')->widget(Select2::className(),[
-        'data' =>['Islam'=>'Islam' , 'Katolik' =>'Katolik',
-        'Kristen'=>'Kristen' , 'Hindu' =>'Hindu','Budha'=>'Budha' , 'Konghucu' =>'Konghucu'
-    
-    ],
-        'options' => [
-        'placeholder' => 'Pilih Agama ...',
-    ]
-    ]
-    ) ?>
+<?= $form->field($model, 'no_hp')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status_pernikahan')->widget(Select2::className(),[
-        'data' =>['Lajang'=>'Lajang' , 'Menikah' =>'Menikah' ,'Janda' =>'Janda','Duda' =>'Duda'],
-        'options' => [
-        'placeholder' => 'Pilih Status Pernikahan ...',
-    ]
-    ]
-    )  
- ?>
+<?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+
+<?= $form->field($model, 'agama')->widget(Select2::className(),[
+    'data' =>['Islam'=>'Islam' , 'Katolik' =>'Katolik',
+    'Kristen'=>'Kristen' , 'Hindu' =>'Hindu','Budha'=>'Budha' , 'Konghucu' =>'Konghucu'
+
+],
+    'options' => [
+    'placeholder' => 'Pilih Agama ...',
+]
+]
+) ?>
+
 
     <?= $form->field($model, 'golongan_darah')->widget(Select2::className(),[
         'data' =>['A'=>'A' , 'B' =>'B' ,'AB' =>'AB','O' =>'O'],
@@ -123,18 +139,6 @@ $dataDepartemen = ArrayHelper::map(Departemen::find()->select(['id','kode'=>"con
 
     <?= $form->field($model, 'riwayat_penyakit')->textArea(['rows'=>12,'style'=>'height: 120px;',]) ?>
 
-    <?= $form->field($model, 'tingkat_pendidikan_terakhir')->widget(Select2::className(),[
-        'data' =>(ArrayHelper::map(app\models\Sekolah::find()->asArray()->all(),'kode','nama')),
-        'options' => [
-        'placeholder' => 'Pilih Pendidikan Terakhir ...',
-    ]
-    ]
-    )   ?>
-
-    <?= $form->field($model, 'nama_pendidikan_terakhir')->textArea(['rows'=>12,'style'=>'height: 120px;',]) ?>
-
-    <?= $form->field($model, 'nilai_pendidikan_terakhir')->textInput(['maxlength' => true]) ?>
-
     
     <?= $form->field($model, 'id_shift')->widget(Select2::className(),[
         'data' =>(ArrayHelper::map(Shift::find()->asArray()->all(),'id','nama')),
@@ -143,6 +147,10 @@ $dataDepartemen = ArrayHelper::map(Departemen::find()->select(['id','kode'=>"con
     ]
     ]
     )   ?>
+</div>
+</div>
+<?= Tabs::widget(['items' =>  $items ,'navType' =>'nav-pills']);  ?>
+
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>

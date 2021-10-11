@@ -45,6 +45,8 @@ class Pegawai extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+    use \mdm\behaviors\ar\RelationTrait;
+
     public static function tableName()
     {
         return 'pegawai';
@@ -150,4 +152,15 @@ class Pegawai extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Jabatan::className(), ['id' => 'id_jabatan']);
     }
+
+    public function getDetailPegawaiAnaks()
+    {
+        return $this->hasMany(DetailPegawaiAnak::className(),['id_pegawai'=>'id']);
+    }
+    
+    public function setDetailPegawaiAnaks($value)
+    {
+         $this->loadRelated('detailPegawaiAnaks', $value);
+    }
+
 }
