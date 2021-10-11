@@ -116,10 +116,10 @@ class UserController extends Controller
 		$model = new User();
 
 		if ($model->load(Yii::$app->request->post())) {
-			$model->setPassword('123456');
+			$model->setPassword($model->username);
 			$model->status = $model->status==1?10:0;
 			if ($model->save()) {
-				Yii::$app->session->setFlash('success', 'User berhasil dibuat dengan password 123456');
+				Yii::$app->session->setFlash('success', 'User berhasil dibuat dengan password'.$model->username);
 			} else {
 				Yii::$app->session->setFlash('error', 'User gagal dibuat');
 			}

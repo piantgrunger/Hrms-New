@@ -3,6 +3,11 @@
 use yii\helpers\Html;
 use yii\bootstrap4\ActiveForm;
 use kartik\widgets\SwitchInput;
+use kartik\select2\Select2;
+use yii\helpers\ArrayHelper;
+
+$dataPegawai = ArrayHelper::map(\app\models\Pegawai::find()->asArray()->select(['id','nama_lengkap'=>"concat(nip,' - ',nama_lengkap)"])->all(),'id','nama_lengkap')
+
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\administrator\models\User */
@@ -24,6 +29,18 @@ use kartik\widgets\SwitchInput;
 		]
 	]) ?>
 
+   
+<?= $form->field($model, 'id_pegawai')->widget(Select2::className(),
+        ['data'=>$dataPegawai,
+        'options' => [
+            'placeholder' => 'Pilih Pegawai ...',
+        ]
+        ]
+
+    
+      ) ?> 
+	
+
 	<?php if (!$model->isNewRecord) { ?>
 		<strong> Leave blank if not change password</strong>
 		<div class="ui divider"></div>
@@ -31,6 +48,7 @@ use kartik\widgets\SwitchInput;
 		<?= $form->field($model, 'repeat_password') ?>
 		<?= $form->field($model, 'old_password') ?>
 	<?php } ?>
+
 	<div class="form-group">
 		<?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 	</div>

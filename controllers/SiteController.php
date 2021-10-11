@@ -13,6 +13,9 @@ use app\models\ResetPasswordForm;
 use app\models\SignupForm;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
+use app\models\Absen;
+use app\models\DetailShift;
+use app\models\JadwalKerja;
 
 class SiteController extends Controller
 {
@@ -71,8 +74,88 @@ class SiteController extends Controller
     public function actionIndex()
     {
         //
+        date_default_timezone_set('Asia/Jakarta');
+      
           $model = new LoginForm();
-        return $this->render('index',['model'=>$model]);
+        if(is_null(Yii::$app->user->identity->pegawai))
+        {  
+            return $this->render('index',['model'=>$model]);
+        } else {
+            $pegawai = Yii::$app->user->identity->pegawai;
+            $hari = date('w', strtotime(date('Y-m-d'))) -1;
+            $jadwalKerja = JadwalKerja::find()->where(['id_pegawai'=> $pegawai->id , 'tanggal'=>date("Y-m-d")])->one();
+            
+
+            $id_shift = ($jadwalKerja)? $jadwalKerja->id_shift : $pegawai->id_shift;
+
+
+            $shift = DetailShift::find()->where(['id_shift' => $id_shift, 'hari' => $hari])->one();
+      if (is_null($shift)) {
+           $tanggal = date('Y-m-d');
+           //print('1');
+          } elseif($shift->jam_masuk<=$shift->jam_pulang) {
+            $tanggal = date('Y-m-d');
+           //print('2');
+           
+           
+         }elseif(strtotime($shift->jam_masuk)-(60*60*2) <=strtotime(date("H:i:s")) ) {
+             $tanggal = date('Y-m-d');
+          // print('3');
+         } else {
+            $tanggal = date('Y-m-d', strtotime("-1 days"));
+          // print(4);
+         }
+         
+         //die();
+      
+           $modelAbsen =  Absen::find()->where(['id_pegawai'=>Yii::$app->user->identity->id_pegawai, 'tanggal'=>$tanggal])->one();
+           if (is_null($modelAbsen)) {
+               $modelAbsen = new Absen();
+               $modelAbsen->id_jenis_absen=1;
+            
+               
+               $modelAbsen->id_pegawai =Yii::$app->user->identity->id_pegawai;
+           }
+         
+
+           if ($modelAbsen->load(Yii::$app->request->post())) {
+               $modelAbsen->tanggal = date('Y-m-d',strtotime($tanggal));
+
+               
+            
+               if (($modelAbsen->masuk_kerja=='') ||    ($modelAbsen->masuk_kerja == '00:00')
+                     ) {
+                   $modelAbsen->masuk_kerja = date('H:i');
+            //       $modelAbsen->posisi_masuk = $modelAbsen->latitude.','.$modelAbsen->longitude; 
+               } else {
+                   $modelAbsen->pulang_kerja = date('H:i');
+              //     $modelAbsen->posisi_pulang = $modelAbsen->latitude.','.$modelAbsen->longitude; 
+            
+               }
+               $modelAbsen->save();
+           }
+        // print($tanggal);
+        
+
+           $modelAbsen =  Absen::find()->where(['id_pegawai'=>Yii::$app->user->identity->id_pegawai, 'tanggal'=>$tanggal])->one();
+           if (is_null($modelAbsen)) {
+               $modelAbsen = new Absen();
+               $modelAbsen->id_pegawai =Yii::$app->user->identity->id_pegawai;
+               $modelAbsen->tanggal = date('Y-m-d',strtotime($tanggal));
+
+           }
+         
+      
+
+           return $this->render(
+            'absen',
+            [
+                'modelAbsen' => $modelAbsen,
+                'pegawai' => $pegawai,
+              //   'deviceId' => $deviceId,
+            ]
+        );
+        }    
     }
 
     /**

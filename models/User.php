@@ -51,7 +51,7 @@ class User extends ActiveRecord implements IdentityInterface
 	public function rules()
 	{
 		return [
-			[['username', 'email'], 'required'],
+			[['username', 'email','id_pegawai'], 'required'],
 			[['username', 'email', 'password_hash'], 'string', 'max' => 255],
 			[['username', 'email'], 'unique'],
 			[['email'], 'email'],
@@ -210,5 +210,11 @@ class User extends ActiveRecord implements IdentityInterface
 	public function removePasswordResetToken()
 	{
 		$this->password_reset_token = null;
+
+	}
+
+	public function getPegawai()
+	{
+		return $this->hasOne(Pegawai::className(),['id'=>'id_pegawai']);
 	}
 }
