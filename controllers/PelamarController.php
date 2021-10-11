@@ -76,7 +76,8 @@ class PelamarController extends Controller
           $pegawai->nip = $model->kode;
           $pegawai->id_divisi = $model->lowongan->id_divisi;
           $pegawai->id_jabatan = $model->lowongan->id_jabatan;
-          
+          $pegawai->status ='Pegawai Kontrak 6 Bulan';
+          $pegawai->tanggal_diterima = date("Y-m-d");     
           if($pegawai->save())
           {
             Yii::$app->session->setFlash('success', "Pegawai Telah Diterima");
