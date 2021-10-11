@@ -139,6 +139,16 @@ $items = [
 
     <?= $form->field($model, 'riwayat_penyakit')->textArea(['rows'=>12,'style'=>'height: 120px;',]) ?>
 
+    <?= $form->field($model, 'tanggal_diterima')->widget(DateControl::className()) ?>
+    <?= $form->field($model, 'status')->widget(Select2::className(),[
+        'data' =>['Pegawai Kontrak 6 Bulan'=>'Pegawai Kontrak 6 Bulan' , 'Pegawai Kontrak 1 Tahun' =>'Pegawai Kontrak 1 Tahun'
+         ,'Pegawai Kontrak 2 Tahun' =>'Pegawai Kontrak 2 Tahun','Pegawai Tetap' =>'Pegawai Tetap'],
+        'options' => [
+        'placeholder' => 'Pilih Status ...',
+    ]
+    ]
+    )    ?>
+
     
     <?= $form->field($model, 'id_shift')->widget(Select2::className(),[
         'data' =>(ArrayHelper::map(Shift::find()->asArray()->all(),'id','nama')),
