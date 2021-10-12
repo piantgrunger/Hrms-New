@@ -33,7 +33,7 @@ class DetailPelamarAnak extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_pelamar', 'tempat_lahir', 'tanggal_lahir'], 'required'],
+            [['tempat_lahir', 'tanggal_lahir'], 'required'],
             [['id_pelamar'], 'integer'],
             [['tanggal_lahir'], 'safe'],
             [['nama'], 'string', 'max' => 100],
