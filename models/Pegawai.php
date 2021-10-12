@@ -58,8 +58,8 @@ class Pegawai extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nip', 'id_divisi', 'id_jabatan', 'nama_lengkap', 'nama_panggilan', 'tempat_lahir','tanggal_diterima', 'tanggal_lahir', 'jenis_kelamin', 'no_ktp', 'agama', 'status_pernikahan', 'tingkat_pendidikan_terakhir','status'], 'required'],
-            [['id_pelamar', 'id_divisi', 'id_departemen', 'id_jabatan', 'id_grade'], 'integer'],
+            [['nip', 'id_divisi', 'id_jabatan', 'nama_lengkap', 'nama_panggilan', 'tempat_lahir','tanggal_diterima', 'tanggal_lahir', 'jenis_kelamin', 'no_ktp', 'agama', 'status_pernikahan', 'tingkat_pendidikan_terakhir','status','status_shift'], 'required'],
+            [['id_pelamar', 'id_divisi', 'id_departemen', 'id_jabatan', 'id_grade','id_group_shift'], 'integer'],
             [['tanggal_lahir','id_shift','nama_pasangan'], 'safe'],
             [['alamat_ktp', 'alamat_domisili', 'riwayat_penyakit', 'nama_pendidikan_terakhir'], 'string'],
             [['nilai_pendidikan_terakhir'], 'number'],

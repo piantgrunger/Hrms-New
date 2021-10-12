@@ -8,6 +8,7 @@ use yii\helpers\ArrayHelper;
 use app\models\Divisi;
 use app\models\Jabatan;
 use app\models\Grade;
+use app\models\GroupShift;
 use app\models\Shift;
 use kartik\datecontrol\DateControl;
 use yii\bootstrap4\Tabs;
@@ -141,14 +142,31 @@ $items = [
 
     <?= $form->field($model, 'tanggal_diterima')->widget(DateControl::className()) ?>
     <?= $form->field($model, 'status')->widget(Select2::className(),[
-        'data' =>['Pegawai Kontrak 6 Bulan'=>'Pegawai Kontrak 6 Bulan' , 'Pegawai Kontrak 1 Tahun' =>'Pegawai Kontrak 1 Tahun'
-         ,'Pegawai Kontrak 2 Tahun' =>'Pegawai Kontrak 2 Tahun','Pegawai Tetap' =>'Pegawai Tetap'],
+        'data' =>['Pegawai Kontrak 3 Bulan'=>'Pegawai Kontrak 3 Bulan' , 'Pegawai Kontrak 6 Bulan'=>'Pegawai Kontrak 6 Bulan' , 'Pegawai Kontrak 1 Tahun (1)' =>'Pegawai Kontrak 1 Tahun (1)'
+         ,'Pegawai Kontrak 1 Tahun (2)' =>'Pegawai Kontrak 1 Tahun (2)','Pegawai Tetap' =>'Pegawai Tetap'],
         'options' => [
         'placeholder' => 'Pilih Status ...',
     ]
     ]
     )    ?>
 
+
+    <?= $form->field($model, 'status_shift')->widget(Select2::className(),[
+        'data' =>['Shift'=>'Shift' ,'Group Shift' => 'Group Shift'],
+        'options' => [
+        'placeholder' => 'Pilih Status Shift ...',
+    ]
+    ]
+    )    ?>
+
+
+<?= $form->field($model, 'id_group_shift')->widget(Select2::className(),[
+        'data' =>(ArrayHelper::map(GroupShift::find()->asArray()->all(),'id','nama')),
+        'options' => [
+        'placeholder' => 'Pilih Group Shift ...',
+    ]
+    ]
+    )   ?>
     
     <?= $form->field($model, 'id_shift')->widget(Select2::className(),[
         'data' =>(ArrayHelper::map(Shift::find()->asArray()->all(),'id','nama')),

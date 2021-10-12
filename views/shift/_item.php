@@ -47,5 +47,5 @@ $data = [
 
     <td>
 
-    <a data-action="delete" id='delete3'><span class="glyphicon glyphicon-trash">
+    <a data-action="delete" id='delete3'><span class="fa fa-trash">
 </td>

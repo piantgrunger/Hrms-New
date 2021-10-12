@@ -70,7 +70,10 @@
                   ['label' => 'Hari Libur', 'icon' => 'calendar-alt', 'url' => ['/hari-libur/index'], 'visible' => !Yii::$app->user->isGuest],
              
                   ['label' => 'Shift', 'icon' => 'clock', 'url' => ['/shift/index'], 'visible' => !Yii::$app->user->isGuest],
+                  ['label' => 'Group Shift', 'icon' => 'users', 'url' => ['/group-shift/index'], 'visible' => !Yii::$app->user->isGuest],
+                  
                   ['label' => 'Absen', 'icon' => 'calendar', 'url' => ['/absen/index'], 'visible' => !Yii::$app->user->isGuest],
+
                   ['label' => 'Surat Lembur', 'icon' => 'hourglass', 'url' => ['/surat-lembur/index'], 'visible' => !Yii::$app->user->isGuest],
                   ['label' => 'Surat Cuti', 'icon' => 'envelope', 'url' => ['/surat-cuti/index'], 'visible' => !Yii::$app->user->isGuest],
                   ['label' => 'Tukar Absen', 'icon' => 'random', 'url' => ['/tukar-absen/index'], 'visible' => !Yii::$app->user->isGuest],
