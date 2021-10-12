@@ -31,7 +31,7 @@ class Departemen extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [[ 'kode', 'nama'],],
+            [[ 'kode', 'nama'],'required'],
             [['kode'], 'string', 'max' => 20],
             [['nama'], 'string', 'max' => 50],
             [['kode'], 'unique'],
