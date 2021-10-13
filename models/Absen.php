@@ -70,7 +70,7 @@ class Absen extends \yii\db\ActiveRecord
             {
                 $shift = ($this->pegawai->group_shift)?$this->pegawai->group_shift->getShift($this->tanggal) :null;
                // die(var_dump($shift->id_shift));
-                $id_shift_pegawai =  (int)$shift->id_shift;
+               $id_shift_pegawai = ($shift) ? (int)$shift->id_shift :"";
                // die(var_dump($id_shift_pegawai));
             }
             
@@ -115,7 +115,7 @@ class Absen extends \yii\db\ActiveRecord
             {
                 $shift = ($this->pegawai->group_shift)?$this->pegawai->group_shift->getShift($this->tanggal) :null;
                // die(var_dump($shift->id_shift));
-                $id_shift_pegawai =  (int)$shift->id_shift;
+                $id_shift_pegawai = ($shift) ? (int)$shift->id_shift :"";
                // die(var_dump($id_shift_pegawai));
             }
             
