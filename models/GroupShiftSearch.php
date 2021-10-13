@@ -19,7 +19,7 @@ class GroupShiftSearch extends GroupShift
     {
         return [
             [['id'], 'integer'],
-            [['kode', 'nama', 'tanggal_mulai', 'refresh_perbulan', 'keterangan'], 'safe'],
+            [['kode', 'nama', 'tanggal_mulai', 'keterangan'], 'safe'],
         ];
     }
 
@@ -65,7 +65,6 @@ class GroupShiftSearch extends GroupShift
 
         $query->andFilterWhere(['like', 'kode', $this->kode])
             ->andFilterWhere(['like', 'nama', $this->nama])
-            ->andFilterWhere(['like', 'refresh_perbulan', $this->refresh_perbulan])
             ->andFilterWhere(['like', 'keterangan', $this->keterangan]);
 
         return $dataProvider;
