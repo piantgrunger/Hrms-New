@@ -10,7 +10,7 @@ $gridColumns=[['class' => 'kartik\grid\SerialColumn'],
             'kode',
             'nama',
             'tanggal_mulai',
-            'refresh_perbulan',
+          //  'refresh_perbulan',
             // 'keterangan:ntext',
 
          ['class' => 'app\widgets\grid\ActionColumn',   'template' => Mimin::filterActionColumn([
