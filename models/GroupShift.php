@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use DateTime;
 use Yii;
 
 /**
@@ -65,12 +66,43 @@ class GroupShift extends \yii\db\ActiveRecord
      */
     public function getDetailGroupShifts()
     {
-        return $this->hasMany(DetailGroupShift::className(), ['id_shift' => 'id']);
+        return $this->hasMany(DetailGroupShift::className(), ['id_group_shift' => 'id']);
     }
 
     public function setDetailGroupShifts($value)
     {
          $this->loadRelated('detailGroupShifts', $value);
+    }
+
+    public function getJumlah_shift()
+    {
+      return  DetailGroupShift::find()->where(['id_group_shift'=>$this->id])->count();
+    }
+
+    public function getShift($tanggal)
+    {
+        $tanggal_mulai = new DateTime($this->tanggal_mulai);
+        $tanggal = new DateTime($tanggal);
+        $interval = (int) $tanggal_mulai->diff($tanggal)->format("%a");
+        $jml= (int)$this->getJumlah_shift();
+
+        $posistion= ($interval+1) % ($jml);
+     
+        if($posistion==0)
+        {
+            
+     
+            $posistion = (int) $this->jumlah_shift;
+        }
+       $posistion--; 
+       // die(var_dump($posistion-1));
+        
+        $shift = DetailGroupShift::find()->where(['id_group_shift'=>$this->id,'urutan'=>($posistion)])->one();
+
+        return $shift; 
+          
+        
+
     }
 
     

@@ -122,7 +122,10 @@ class Pegawai extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Departemen::className(), ['id' => 'id_departemen']);
     }
-
+    public function getGroup_shift()
+    {
+        return $this->hasOne(GroupShift::className(), ['id' => 'id_group_shift']);
+    }
     /**
      * Gets query for [[Divisi]].
      *

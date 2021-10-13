@@ -60,13 +60,24 @@ class Absen extends \yii\db\ActiveRecord
 
     public function hitungJamTerlambat($attribute, $params)
     {
-        $hari = date('w', strtotime($this->tanggal)) -1;
+        $hari = date('w', strtotime($this->tanggal)) ;
         if ($this->jenisAbsen->status_hadir == 'Hadir') {
             $jadwalKerja = JadwalKerja::find()->where(['id_pegawai'=> $this->id_pegawai , 'tanggal'=>$this->tanggal])->one();
+            if($this->pegawai->status_shift =='Shift') 
+            {
+                $id_shift_pegawai = $this->pegawai->id_shift;
+            } else 
+            {
+                $shift = ($this->pegawai->group_shift)?$this->pegawai->group_shift->getShift($this->tanggal) :null;
+               // die(var_dump($shift->id_shift));
+                $id_shift_pegawai =  (int)$shift->id_shift;
+               // die(var_dump($id_shift_pegawai));
+            }
             
 
-            $id_shift = ($jadwalKerja)? $jadwalKerja->id_shift : $this->pegawai->id_shift;
+            $id_shift = ($jadwalKerja)? $jadwalKerja->id_shift : $id_shift_pegawai;
 
+            
 
             $shift = DetailShift::find()->where(['id_shift' => $id_shift, 'hari' => $hari])->one();
 
@@ -93,12 +104,24 @@ class Absen extends \yii\db\ActiveRecord
 
     public function hitungJamPulang($attribute, $params)
     {
-        $hari = date('w', strtotime($this->tanggal))-1;
+        $hari = date('w', strtotime($this->tanggal));
         if ($this->jenisAbsen->status_hadir == 'Hadir') {
             $jadwalKerja = JadwalKerja::find()->where(['id_pegawai'=> $this->id_pegawai , 'tanggal'=>$this->tanggal])->one();
             
+            if($this->pegawai->status_shift =='Shift') 
+            {
+                $id_shift_pegawai = $this->pegawai->id_shift;
+            } else 
+            {
+                $shift = ($this->pegawai->group_shift)?$this->pegawai->group_shift->getShift($this->tanggal) :null;
+               // die(var_dump($shift->id_shift));
+                $id_shift_pegawai =  (int)$shift->id_shift;
+               // die(var_dump($id_shift_pegawai));
+            }
+            
 
-            $id_shift = ($jadwalKerja)? $jadwalKerja->id_shift : $this->pegawai->id_shift;
+            $id_shift = ($jadwalKerja)? $jadwalKerja->id_shift : $id_shift_pegawai;
+
 
 
             $shift = DetailShift::find()->where(['id_shift' => $id_shift, 'hari' => $hari])->one();

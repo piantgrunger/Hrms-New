@@ -33,7 +33,7 @@ class DetailGroupShift extends \yii\db\ActiveRecord
         return [
             [[ 'id_shift'], 'required'],
             [['id_group_shift', 'id_shift', 'urutan'], 'integer'],
-            [['id_shift'], 'exist', 'skipOnError' => true, 'targetClass' => GroupShift::className(), 'targetAttribute' => ['id_shift' => 'id']],
+            [['id_group_shift'], 'exist', 'skipOnError' => true, 'targetClass' => GroupShift::className(), 'targetAttribute' => ['id_group_shift' => 'id']],
             [['id_shift'], 'exist', 'skipOnError' => true, 'targetClass' => Shift::className(), 'targetAttribute' => ['id_shift' => 'id']],
         ];
     }

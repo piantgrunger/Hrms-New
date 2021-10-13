@@ -26,7 +26,7 @@ class m211012_101132_create_group_shift_table extends Migration
             'id' => $this->primaryKey(),
             'id_group_shift' => $this->integer()->notNull(),
             'id_shift' => $this->integer()->notNull(),
-            "FOREIGN KEY (id_shift) REFERENCES group_shift(id)     ON DELETE CASCADE
+            "FOREIGN KEY (id_group_shift) REFERENCES group_shift(id)     ON DELETE CASCADE
             ON UPDATE CASCADE",
             "FOREIGN KEY (id_shift) REFERENCES shift(id)  ",
             
