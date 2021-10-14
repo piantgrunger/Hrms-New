@@ -91,7 +91,7 @@
                   'items' => [
       
                     ['label' => 'Lembur Detail', 'icon' => 'hourglass', 'url' => ['/surat-lembur/laporan'], 'visible' => !Yii::$app->user->isGuest],
-                    ['label' => 'Lembur Rekap', 'icon' => 'hourglass', 'url' => ['/surat-lembur/laporan-rekap'], 'visible' => !Yii::$app->user->isGuest],
+                    ['label' => 'Lembur Rekap', 'icon' => 'hourglassp', 'url' => ['/surat-lembur/laporan-rekap'], 'visible' => !Yii::$app->user->isGuest],
       
                   ], ],
       
