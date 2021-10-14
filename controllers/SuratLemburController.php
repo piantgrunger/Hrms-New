@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\SuratLembur;
+use app\models\LaporanLembur;
 use app\models\SuratLemburSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -39,6 +40,27 @@ class SuratLemburController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionLaporan()
+    {
+        $searchModel = new LaporanLembur();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('laporan', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+    public function actionLaporanRekap()
+    {
+        $searchModel = new LaporanLembur();
+        $dataProvider = $searchModel->searchRekap(Yii::$app->request->queryParams);
+
+        return $this->render('laporan-rekap', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);

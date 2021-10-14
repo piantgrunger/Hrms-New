@@ -17,7 +17,7 @@ $dataDivisi = ArrayHelper::map(Divisi::find()->select(['id', 'kode' => "concat(k
 <div class="surat-lembur-search">
 
     <?php $form = ActiveForm::begin([
-        'action' => ['laporan'],
+        'action' => ['laporan-rekap'],
         'method' => 'get',
         'options' => [
             'data-pjax' => 1

@@ -15,8 +15,11 @@ class ShiftSearch extends Shift
     /**
      * @inheritdoc
      */
+  
+
     public function rules()
     {
+
         return [
             [['id'], 'integer'],
             [['kode', 'nama', 'keterangan'], 'safe'],

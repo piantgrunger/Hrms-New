@@ -79,8 +79,22 @@
                   ['label' => 'Tukar Absen', 'icon' => 'random', 'url' => ['/tukar-absen/index'], 'visible' => !Yii::$app->user->isGuest],
                   ['label' => 'Jadwal Kerja', 'icon' => 'calendar-plus', 'url' => ['/jadwal-kerja/index'], 'visible' => !Yii::$app->user->isGuest],
     
-    
+              
                 ], ],
+
+                [
+                  'visible' => !Yii::$app->user->isGuest,
+                  'label' => 'Laporan Kehadiran ',
+                  'icon' => 'paper-plane',
+                  'url' => '#',
+                  'id' => 'hrd',
+                  'items' => [
+      
+                    ['label' => 'Lembur Detail', 'icon' => 'hourglass', 'url' => ['/surat-lembur/laporan'], 'visible' => !Yii::$app->user->isGuest],
+                    ['label' => 'Lembur Rekap', 'icon' => 'hourglass', 'url' => ['/surat-lembur/laporan-rekap'], 'visible' => !Yii::$app->user->isGuest],
+      
+                  ], ],
+      
                 [
                   'visible' => !Yii::$app->user->isGuest,
                   'label' => 'Payroll',

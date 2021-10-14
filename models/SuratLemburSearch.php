@@ -15,6 +15,7 @@ class SuratLemburSearch extends SuratLembur
     /**
      * @inheritdoc
      */
+    
     public function rules()
     {
         return [
