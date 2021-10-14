@@ -8,6 +8,8 @@ use app\models\SuratCutiSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\helpers\myhelpers;
+use app\models\Absen;
 
 /**
  * SuratCutiController implements the CRUD actions for SuratCuti model.
@@ -72,6 +74,44 @@ class SuratCutiController extends Controller
                 'model' => $model,
             ]);
         }
+    }
+
+    public function actionApprove($id)
+    {
+
+        $model = $this->findModel($id);
+        $tgl = date_create($model->tanggal_dari);
+        $akhir = date_create($model->tanggal_sampai);
+        while ($tgl <= $akhir) {
+            $tgl2 = date_format($tgl, 'Y-m-d');
+            if (!myhelpers::isLibur($tgl2, $model->id_pegawai)) {
+                    $model1 = Absen::find()->where(['id_pegawai' => $model->id_pegawai])->andWhere("tanggal ='$tgl2'")->one();
+                    if (is_null($model1)) {
+                        $model1 = new Absen();
+                    }
+           //         $model1->scenario = 'Cuti';
+                    $model1->tanggal = $tgl2;
+                    $model1->id_jenis_absen = $model->id_jenis_absen;
+                    $model1->id_pegawai = $model->id_pegawai;
+                    //   $model1->masuk_kerja = '00:00';
+                    // $model1->pulang_kerja = '00:00';
+                    $model1->id_cuti = $model->id;
+                    $model1->terlambat =0;
+                    $model1->pulang_awal =0;
+                    if($model1->save())      {
+                        Yii::$app->session->setFlash('success', "Cuti Telah Diterima");
+                      } else {
+                        Yii::$app->session->setFlash('error', implode ( "<br />" , \yii\helpers\ArrayHelper::getColumn ( $model1->errors , 0 , false ) ) );
+                          
+                      }
+                
+                
+            }
+            date_add($tgl, date_interval_create_from_date_string('1 days'));
+        }
+        
+        return $this->redirect(['index']);
+
     }
 
     /**

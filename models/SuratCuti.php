@@ -32,7 +32,7 @@ class SuratCuti extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_pegawai', 'tanggal', 'id_jenis_absen', 'keterangan'], 'required'],
+            [['id_pegawai', 'tanggal_dari', 'tanggal_sampai', 'id_jenis_absen', 'keterangan'], 'required'],
             [['id_pegawai', 'id_jenis_absen'], 'integer'],
             [['tanggal'], 'safe'],
             [['keterangan'], 'string'],

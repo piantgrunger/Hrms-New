@@ -29,7 +29,8 @@ $dataPegawai = ArrayHelper::map(\app\models\Pegawai::find()->asArray()->select([
     
       ) ?>
 
-    <?= $form->field($model, 'tanggal')->widget(DateControl::className()) ?>
+    <?= $form->field($model, 'tanggal_dari')->widget(DateControl::className()) ?>
+    <?= $form->field($model, 'tanggal_sampai')->widget(DateControl::className()) ?>
 
     <?= $form->field($model, 'id_jenis_absen')->widget(Select2::className(),
         ['data'=>(ArrayHelper::map(\app\models\JenisAbsen::find()->where(['status_hadir'=>'Tidak Hadir'])->asArray()->all(),'id','nama')),
@@ -42,7 +43,7 @@ $dataPegawai = ArrayHelper::map(\app\models\Pegawai::find()->asArray()->select([
       ) ?>
 
 
-<?= $form->field($model, 'tanggal')->widget(DateControl::className()) ?>
+
 
 
     <?= $form->field($model, 'keterangan')->textArea(['rows'=>12,'style'=>'height: 120px;',]) ?>

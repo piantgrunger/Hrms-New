@@ -19,7 +19,7 @@ class SuratCutiSearch extends SuratCuti
     {
         return [
             [['id', 'id_pegawai', 'id_jenis_absen'], 'integer'],
-            [['tanggal', 'keterangan'], 'safe'],
+            [['tanggal_dari','tanggal_sampai', 'keterangan'], 'safe'],
         ];
     }
 
@@ -61,7 +61,6 @@ class SuratCutiSearch extends SuratCuti
         $query->andFilterWhere([
             'id' => $this->id,
             'id_pegawai' => $this->id_pegawai,
-            'tanggal' => $this->tanggal,
             'id_jenis_absen' => $this->id_jenis_absen,
         ]);
 
