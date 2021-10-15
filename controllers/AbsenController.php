@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Absen;
 use app\models\AbsenSearch;
+use app\models\LaporanAbsen;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -29,6 +30,17 @@ class AbsenController extends Controller
         ];
     }
 
+    public function actionLaporan()
+    {
+        $searchModel = new LaporanAbsen();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('laporan', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+ 
     /**
      * Lists all Absen models.
      * @return mixed

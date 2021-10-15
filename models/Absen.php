@@ -26,6 +26,38 @@ class Absen extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+    public $h1;
+    public $h2;
+    public $h3;
+    public $h4;
+    public $h5;
+    public $h6;
+    public $h7;
+    public $h8;
+    public $h9;
+    public $h10;
+    public $h11;
+    public $h12;
+    public $h13;
+    public $h14;
+    public $h15;
+    public $h16;
+    public $h17;
+    public $h18;
+    public $h19;
+    public $h20;
+    public $h21;
+    public $h22;
+    public $h23;
+    public $h24;
+    public $h25;
+    public $h26;
+    public $h27;
+    public $h28;
+    public $h39;
+    public $h30;
+    public $h31;
+    
     public static function tableName()
     {
         return 'absen';
