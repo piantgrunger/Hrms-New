@@ -57,11 +57,11 @@ class Absen extends \yii\db\ActiveRecord
     public $h39;
     public $h30;
     public $h31;
-    
     public static function tableName()
     {
         return 'absen';
     }
+
 
     /**
      * {@inheritdoc}
@@ -70,8 +70,8 @@ class Absen extends \yii\db\ActiveRecord
     {
         return [
             [['id_pegawai', 'tanggal', 'id_jenis_absen'], 'required'],
-            [['id_pegawai', 'id_jenis_absen','id_shift'], 'integer'],
-            [['id_pegawai','tanggal'],'unique', 'targetAttribute' =>['id_pegawai','tanggal'] , 'comboNotUnique' => 'Pegawai Sudah Absen di Tanggal Ini'],
+            [['id_pegawai', 'id_jenis_absen', 'id_shift'], 'integer'],
+            [['id_pegawai', 'tanggal'], 'unique', 'targetAttribute' => ['id_pegawai', 'tanggal'], 'comboNotUnique' => 'Pegawai Sudah Absen di Tanggal Ini'],
             [['tanggal'], 'safe'],
             [['terlambat', 'pulang_awal', 'lembur'], 'number'],
             [['keterangan'], 'string'],
@@ -92,37 +92,35 @@ class Absen extends \yii\db\ActiveRecord
 
     public function hitungJamTerlambat($attribute, $params)
     {
-        $hari = date('w', strtotime($this->tanggal)) ;
+        $hari = date('w', strtotime($this->tanggal));
         if ($this->jenisAbsen->status_hadir == 'Hadir') {
-            $jadwalKerja = JadwalKerja::find()->where(['id_pegawai'=> $this->id_pegawai , 'tanggal'=>$this->tanggal])->one();
-            if($this->pegawai->status_shift =='Shift') 
-            {
+            $jadwalKerja = JadwalKerja::find()->where(['id_pegawai' => $this->id_pegawai, 'tanggal' => $this->tanggal])->one();
+            if ($this->pegawai->status_shift == 'Shift') {
                 $id_shift_pegawai = $this->pegawai->id_shift;
-            } else 
-            {
-                $shift = ($this->pegawai->group_shift)?$this->pegawai->group_shift->getShift($this->tanggal) :null;
-               // die(var_dump($shift->id_shift));
-               $id_shift_pegawai = ($shift) ? (int)$shift->id_shift :"";
-               // die(var_dump($id_shift_pegawai));
+            } else {
+                $shift = ($this->pegawai->group_shift) ? $this->pegawai->group_shift->getShift($this->tanggal) : null;
+                // die(var_dump($shift->id_shift));
+                $id_shift_pegawai = ($shift) ? (int)$shift->id_shift : "";
+                // die(var_dump($id_shift_pegawai));
             }
-            
 
-            $id_shift = ($jadwalKerja)? $jadwalKerja->id_shift : $id_shift_pegawai;
 
-            
+            $id_shift = ($jadwalKerja) ? $jadwalKerja->id_shift : $id_shift_pegawai;
+
+
 
             $shift = DetailShift::find()->where(['id_shift' => $id_shift, 'hari' => $hari])->one();
 
 
             if (!is_null($shift)) {
-                 $this->id_shift = $shift->id_shift;
-                 if (((strtotime($this->masuk_kerja) - strtotime($shift->masuk_kerja)) / 3600) > 0.001) {
+                $this->id_shift = $shift->id_shift;
+                if (((strtotime($this->masuk_kerja) - strtotime($shift->masuk_kerja)) / 3600) > 0.001) {
                     $this->terlambat = ((strtotime($this->masuk_kerja) - strtotime($shift->masuk_kerja)) / 3600);
                 } else {
                     $this->terlambat = 0;
                 }
             } else {
-                $this->terlambat =0;
+                $this->terlambat = 0;
             }
         } else {
             if ($this->scenario !== 'Cuti') {
@@ -138,21 +136,19 @@ class Absen extends \yii\db\ActiveRecord
     {
         $hari = date('w', strtotime($this->tanggal));
         if ($this->jenisAbsen->status_hadir == 'Hadir') {
-            $jadwalKerja = JadwalKerja::find()->where(['id_pegawai'=> $this->id_pegawai , 'tanggal'=>$this->tanggal])->one();
-            
-            if($this->pegawai->status_shift =='Shift') 
-            {
-                $id_shift_pegawai = $this->pegawai->id_shift;
-            } else 
-            {
-                $shift = ($this->pegawai->group_shift)?$this->pegawai->group_shift->getShift($this->tanggal) :null;
-               // die(var_dump($shift->id_shift));
-                $id_shift_pegawai = ($shift) ? (int)$shift->id_shift :"";
-               // die(var_dump($id_shift_pegawai));
-            }
-            
+            $jadwalKerja = JadwalKerja::find()->where(['id_pegawai' => $this->id_pegawai, 'tanggal' => $this->tanggal])->one();
 
-            $id_shift = ($jadwalKerja)? $jadwalKerja->id_shift : $id_shift_pegawai;
+            if ($this->pegawai->status_shift == 'Shift') {
+                $id_shift_pegawai = $this->pegawai->id_shift;
+            } else {
+                $shift = ($this->pegawai->group_shift) ? $this->pegawai->group_shift->getShift($this->tanggal) : null;
+                // die(var_dump($shift->id_shift));
+                $id_shift_pegawai = ($shift) ? (int)$shift->id_shift : "";
+                // die(var_dump($id_shift_pegawai));
+            }
+
+
+            $id_shift = ($jadwalKerja) ? $jadwalKerja->id_shift : $id_shift_pegawai;
 
 
 
@@ -165,13 +161,13 @@ class Absen extends \yii\db\ActiveRecord
                 //     $this->pulang_awal = 0;
                 // } else
 
-                
-                if (((strtotime($this->pulang_kerja) - strtotime($shift->pulang_kerja)) / 3600) >0) {
+
+                if (((strtotime($this->pulang_kerja) - strtotime($shift->pulang_kerja)) / 3600) > 0) {
                     $this->lembur = (abs(strtotime($this->pulang_kerja) - strtotime($shift->pulang_kerja)) / 3600);
                 } else {
                     $this->lembur = 0;
                 }
-            
+
 
                 if (((strtotime($this->pulang_kerja) - strtotime($shift->pulang_kerja)) / 3600) < 0) {
                     $this->pulang_awal = (abs(strtotime($shift->pulang_kerja) - strtotime($this->pulang_kerja)) / 3600);
@@ -179,7 +175,7 @@ class Absen extends \yii\db\ActiveRecord
                     $this->pulang_awal = 0;
                 }
             } else {
-                $this ->pulang_awal=0;
+                $this->pulang_awal = 0;
             }
         } else {
             if ($this->scenario !== 'Cuti') {
@@ -205,7 +201,7 @@ class Absen extends \yii\db\ActiveRecord
             'keterangan' => Yii::t('app', 'Keterangan'),
             'shift.nama' => 'Shift',
             'jenisAbsen.nama' => 'Jenis Absen',
-        
+
         ];
     }
 

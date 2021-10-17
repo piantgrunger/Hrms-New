@@ -40,6 +40,18 @@ class AbsenController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+
+    
+    public function actionLaporanRekap()
+    {
+        $searchModel = new LaporanAbsen();
+        $dataProvider = $searchModel->searchRekap(Yii::$app->request->queryParams);
+
+        return $this->render('laporan-rekap', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
  
     /**
      * Lists all Absen models.

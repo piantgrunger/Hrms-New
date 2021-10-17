@@ -78,4 +78,33 @@ class LaporanAbsen extends Absen
         $query->andWhere(['id_divisi'=>$this->divisi]);
        return $dataProvider;
     }
+
+    public function searchRekap($params)
+    {
+        $query = Absen::find()
+        ->joinWith('pegawai')
+        ->joinWith('jenisAbsen');
+
+        // add conditions that should always apply here
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+             $query->where('0=1');
+            return $dataProvider;
+        }
+        $select = ['id_pegawai'];
+        
+        $query->select($select);
+        $query->groupBy('id_pegawai');
+        $query->andWhere(['between','tanggal',$this->tanggal_dari,$this->tanggal_sampai]);
+        $query->andWhere(['id_divisi'=>$this->divisi]);
+       return $dataProvider;
+    }
+
 }

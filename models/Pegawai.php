@@ -166,4 +166,11 @@ class Pegawai extends \yii\db\ActiveRecord
          $this->loadRelated('detailPegawaiAnaks', $value);
     }
 
+
+    public function getJumlahAbsen($id_jenis_absen,$tanggal_dari,$tanggal_sampai)
+    {
+        return Absen::find()->where(['id_pegawai' => $this->id ,'id_jenis_absen'=>$id_jenis_absen])->andWhere(['between','tanggal',$tanggal_dari,$tanggal_sampai])
+        ->count();
+    }
+
 }
