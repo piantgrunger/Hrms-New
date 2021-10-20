@@ -109,6 +109,7 @@
                     ['label' => 'Data Payroll', 'icon' => 'money-check', 'url' => ['/payroll/index'], 'visible' => !Yii::$app->user->isGuest],
                     ['label' => 'Potongan Lain', 'icon' => 'money-bill-wave', 'url' => ['/potongan-lain/index'], 'visible' => !Yii::$app->user->isGuest],
                     ['label' => 'Tunjangan Lain', 'icon' => 'money-bill-wave', 'url' => ['/tunjangan-lain/index'], 'visible' => !Yii::$app->user->isGuest],
+                    ['label' => 'Perhitungan Gaji', 'icon' => 'money-bill-wave', 'url' => ['/hitung-gaji/index'], 'visible' => !Yii::$app->user->isGuest],
                     
                   ], ],
       
