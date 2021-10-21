@@ -87,4 +87,10 @@ class DetailHitungGaji extends \yii\db\ActiveRecord
     {
         return $this->hasMany(SubdetailHitungGaji::className(), ['id_detail' => 'id']);
     }
+
+    public function getTotal()
+    {
+        return $this->gaji_pokok+$this->gaji_lembur+$this->tunjangan-$this->potongan-$this->bpjs_kesehatan_pegawai-$this->bpjs_tk_pegawai;
+
+    }
 }

@@ -7,10 +7,12 @@ use app\models\DetailHitungGaji;
 use Yii;
 use app\models\HitungGaji;
 use app\models\HitungGajiSearch;
+use app\models\SubdetailHitungGaji;
 use yii\data\ArrayDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use kartik\mpdf\Pdf;
 
 /**
  * HitungGajiController implements the CRUD actions for HitungGaji model.
@@ -61,6 +63,86 @@ class HitungGajiController extends Controller
             'model' => $this->findModel($id),
             'dataProvider' => $dataProvider
         ]);
+    }
+
+    public function actionSlipgaji($id)
+    {
+        $model = DetailHitungGaji::find()->where(['id'=>$id])->one();
+        $content = $this->renderPartial('slipgaji', [
+            'model' => $model,
+        ]);
+        $pdf = new Pdf([
+            // set to use core fonts only
+                     'mode' => Pdf::MODE_UTF8,
+            // A4 paper format
+                     'marginTop' =>'4',
+           'marginFooter' => '4',
+                     'format' => Pdf::FORMAT_A4,
+            // portrait orientation
+                     'orientation' => Pdf::ORIENT_PORTRAIT,
+            // stream to browser inline
+                     'destination' => Pdf::DEST_BROWSER,
+            // your html content input
+                     'content' => $content,
+            // format content from your own css file if needed or use the
+            // enhanced bootstrap css built by Krajee for mPDF formatting
+                //     'cssFile' => '@app/web/css/print.css',
+                     'defaultFont' => 'Georgia',
+                 'cssFile' => '@vendor/kartik-v/yii2-mpdf/src/assets/kv-mpdf-bootstrap.min.css',
+
+            // any css to be embedded if required
+                     'cssInline' => '.kv-heading-1{font-size:18px}',
+             // set mPDF properties on the fly
+                     'options' => ['title' => 'Cetak  '],
+             // call mPDF methods on the fly
+        //  'methods' =>['SetFooter'=>['Dicetak Melalui Aplikasi Banjarbaru Bagawi - BKPP BJB'],]
+                 ]);
+
+        return  $pdf->render();
+
+    }
+
+
+    public function actionSliplembur($id,$id_pegawai)
+    {
+        $model = DetailHitungGaji::find()->where(['id_hitung_gaji'=>$id])->one();
+    
+        $detail = new ArrayDataProvider([
+            'allModels' => SubdetailHitungGaji::find()->where(['id_detail'=>$id,'id_pegawai'=>$id_pegawai,'jenis'=>'lembur'])->all()
+        ]);    
+        $content = $this->renderPartial('sliplembur', [
+            'model' => $model,
+            'detail' => $detail
+        ]);
+        $pdf = new Pdf([
+            // set to use core fonts only
+                     'mode' => Pdf::MODE_UTF8,
+            // A4 paper format
+                     'marginTop' =>'4',
+           'marginFooter' => '4',
+                     'format' => Pdf::FORMAT_A4,
+            // portrait orientation
+                     'orientation' => Pdf::ORIENT_PORTRAIT,
+            // stream to browser inline
+                     'destination' => Pdf::DEST_BROWSER,
+            // your html content input
+                     'content' => $content,
+            // format content from your own css file if needed or use the
+            // enhanced bootstrap css built by Krajee for mPDF formatting
+                //     'cssFile' => '@app/web/css/print.css',
+                     'defaultFont' => 'Georgia',
+                 'cssFile' => '@vendor/kartik-v/yii2-mpdf/src/assets/kv-mpdf-bootstrap.min.css',
+
+            // any css to be embedded if required
+                     'cssInline' => '.kv-heading-1{font-size:18px}',
+             // set mPDF properties on the fly
+                     'options' => ['title' => 'Cetak  '],
+             // call mPDF methods on the fly
+        //  'methods' =>['SetFooter'=>['Dicetak Melalui Aplikasi Banjarbaru Bagawi - BKPP BJB'],]
+                 ]);
+
+        return  $pdf->render();
+
     }
 
     /**

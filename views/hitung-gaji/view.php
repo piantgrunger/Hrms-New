@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\helpers\Url;
 use hscstudio\mimin\components\Mimin;
 use kartik\grid\GridView;
 
@@ -51,9 +52,28 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             'pegawai.nip',
             'pegawai.nama_lengkap',
-            'gaji_pokok:decimal', 'gaji_lembur:decimal', 'tunjangan:decimal', 'potongan:decimal', 'bpjs_kesehatan_pegawai:decimal',  'bpjs_tk_pegawai:decimal'
+            'gaji_pokok:decimal', 'gaji_lembur:decimal', 'tunjangan:decimal', 'potongan:decimal', 'bpjs_kesehatan_pegawai:decimal',  'bpjs_tk_pegawai:decimal',
+            'total:decimal',
 
 
+            ['class' => 'app\widgets\grid\ActionColumn',   'template' => "{slipgaji}",
+            'buttons' => [
+                'slipgaji' => function ($url, $model) {
+                    if (Mimin::checkRoute($this->context->id . '/slipgaji')) {
+                        return
+                            Html::a(
+                                Yii::t('app', '<i class="fa fa-print" aria-hidden="true"></i> '),
+                                Url::to(['slipgaji', 'id' => $model->id]),
+                                [
+                                'target' => '_blank',
+                                'title' => 'Cetak Slip', 'class' => 'btn btn-sm',
+                                ]
+                            );
+                    } else {
+                        return ' ';
+                    }
+                },]
+        ], 
         ],
     ]); ?>
 
