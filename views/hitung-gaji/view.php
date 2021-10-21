@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'total:decimal',
 
 
-            ['class' => 'app\widgets\grid\ActionColumn',   'template' => "{slipgaji}",
+            ['class' => 'app\widgets\grid\ActionColumn',   'template' => "{slipgaji} {sliplembur}",
             'buttons' => [
                 'slipgaji' => function ($url, $model) {
                     if (Mimin::checkRoute($this->context->id . '/slipgaji')) {
@@ -66,13 +66,30 @@ $this->params['breadcrumbs'][] = $this->title;
                                 Url::to(['slipgaji', 'id' => $model->id]),
                                 [
                                 'target' => '_blank',
-                                'title' => 'Cetak Slip', 'class' => 'btn btn-sm',
+                                'title' => 'Cetak Slip Gaji', 'class' => 'btn btn-sm',
                                 ]
                             );
                     } else {
                         return ' ';
                     }
-                },]
+                },
+                'sliplembur' => function ($url, $detail) {
+                    if (Mimin::checkRoute($this->context->id . '/sliplembur')) {
+                        return
+                            Html::a(
+                                Yii::t('app', '<i class="fa fa-print" aria-hidden="true"></i> '),
+                                Url::to(['sliplembur', 'id' => $detail->id_hitung_gaji,'id_pegawai'=> $detail->id_pegawai]),
+                                [
+                                'target' => '_blank',
+                                'title' => 'Cetak Slip Lembur', 'class' => 'btn btn-sm',
+                                ]
+                            );
+                    } else {
+                        return ' ';
+                    }
+                },
+                
+                ]
         ], 
         ],
     ]); ?>
