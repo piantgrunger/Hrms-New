@@ -101,7 +101,7 @@
                 [
                   'visible' => !Yii::$app->user->isGuest,
                   'label' => ' Penilaian ',
-                  'icon' => 'paper',
+                  'icon' => 'swatchbook',
                   'url' => '#',    'id' => 'hrd',
                   'items' => [
                     ['label' => 'Indikator', 'icon' => 'calendar', 'url' => ['/indikator/index'], 'visible' => !Yii::$app->user->isGuest],
