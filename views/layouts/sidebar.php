@@ -97,6 +97,20 @@
       
                   ], ],
       
+                  
+                [
+                  'visible' => !Yii::$app->user->isGuest,
+                  'label' => ' Penilaian ',
+                  'icon' => 'paper',
+                  'url' => '#',    'id' => 'hrd',
+                  'items' => [
+                    ['label' => 'Indikator', 'icon' => 'calendar', 'url' => ['/indikator/index'], 'visible' => !Yii::$app->user->isGuest],
+                    ['label' => 'Penilaian', 'icon' => 'calendar', 'url' => ['/penilaian/index'], 'visible' => !Yii::$app->user->isGuest],
+                    
+                  ]
+                  
+                ],
+      
                 [
                   'visible' => !Yii::$app->user->isGuest,
                   'label' => 'Payroll',
